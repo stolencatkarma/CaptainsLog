@@ -1,0 +1,94 @@
+# Captain's Log - UEE Navy Interface
+# .gitignore file
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# PyInstaller build artifacts
+build/
+dist/
+*.spec
+*.exe
+*.app
+*.dmg
+*.pkg
+
+# Build tools and scripts
+build.bat
+BUILD_SUMMARY.md
+version_info.txt
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Encryption keys
+encryption.key
+*.key
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+
+# Virtual environments
+pip-log.txt
+pip-delete-this-directory.txt
+
+# PyQt generated files
+*.qm
+*.pro.user*
+
+# Distribution artifacts
+*.tar.gz
+*.zip
+*.rar
+*.7z
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Documentation builds
+docs/_build/
+
+# Local configuration
+config.local
+.env
+.env.local
+
+# User data
+user_data/
+backups/
