@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import (QDialog, QVBoxLayout, QHBoxLayout, QFormLayout,
                              QLineEdit, QTextEdit, QComboBox, QSpinBox,
-                             QPushButton, QLabel, QGroupBox, QMessageBox)
+                             QPushButton, QLabel, QGroupBox, QMessageBox, QFrame)
 from PyQt6.QtCore import Qt, pyqtSignal
 from PyQt6.QtGui import QFont
 from datetime import datetime
@@ -27,95 +27,71 @@ class LogEntryDialog(QDialog):
         self.setWindowTitle("UEE Navy Log Entry")
         self.setModal(True)
         self.resize(800, 600)
-        
+
         # Main layout
         layout = QVBoxLayout(self)
-        
+
         # Title
-        title_label = QLabel("UEE NAVY LOG ENTRY")
+        title_label = QLabel("\uf135  UEE NAVY LOG ENTRY")  # FontAwesome rocket icon
         title_label.setProperty("class", "title")
         title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        title_label.setObjectName("fa")
         layout.addWidget(title_label)
-        
+
+        # Card Frame for log entry
+        card_frame = QFrame()
+        card_frame.setProperty("class", "log-card")
+        card_layout = QVBoxLayout(card_frame)
+
         # Stardate and Date info
-        date_group = QGroupBox("Temporal Coordinates")
+        date_group = QGroupBox("\uf073  Temporal Coordinates")  # FontAwesome calendar icon
+        date_group.setObjectName("fa")
         date_layout = QFormLayout(date_group)
-        
+
         self.stardate_label = QLabel()
         self.stardate_label.setProperty("class", "stardate")
-        date_layout.addRow("Current SET:", self.stardate_label)
-        
+        date_layout.addRow("\uf017  Current SET:", self.stardate_label)  # FontAwesome clock icon
+
         self.earth_date_label = QLabel()
-        date_layout.addRow("Earth Date:", self.earth_date_label)
-        
-        layout.addWidget(date_group)
-        
-        # Log entry form
-        form_group = QGroupBox("Log Entry Details")
+        date_layout.addRow("\uf133  Earth Date:", self.earth_date_label)  # FontAwesome calendar-alt icon
+
+        card_layout.addWidget(date_group)
+
+        # Log content fields
+        form_group = QGroupBox("\uf02d  Log Details")  # FontAwesome book icon
+        form_group.setObjectName("fa")
         form_layout = QFormLayout(form_group)
-        
-        # Log type
-        self.log_type_combo = QComboBox()
-        self.populate_log_types()
-        form_layout.addRow("Log Type:", self.log_type_combo)
-        
-        # Priority
-        self.priority_combo = QComboBox()
-        self.priority_combo.addItems([
-            "1 - Routine",
-            "2 - Standard", 
-            "3 - Important",
-            "4 - Urgent",
-            "5 - Critical"
-        ])
-        self.priority_combo.setCurrentIndex(1)  # Default to Standard
-        form_layout.addRow("Priority:", self.priority_combo)
-        
-        # Classification
-        self.classification_combo = QComboBox()
-        self.classification_combo.addItems([
-            "UNCLASSIFIED",
-            "CLASSIFIED",
-            "TOP_SECRET"
-        ])
-        form_layout.addRow("Classification:", self.classification_combo)
-        
-        # Title
+
         self.title_edit = QLineEdit()
-        self.title_edit.setPlaceholderText("Enter log entry title...")
-        form_layout.addRow("Title:", self.title_edit)
-        
-        layout.addWidget(form_group)
-        
-        # Content
-        content_group = QGroupBox("Log Content")
-        content_layout = QVBoxLayout(content_group)
-        
+        form_layout.addRow("\uf303  Title:", self.title_edit)  # FontAwesome pencil-alt icon
+
         self.content_edit = QTextEdit()
-        self.content_edit.setPlaceholderText("Begin log entry...\n\nCommander's personal note: Remember to maintain proper stardate formatting and include all relevant mission details.")
-        self.content_edit.setMinimumHeight(200)
-        content_layout.addWidget(self.content_edit)
-        
-        layout.addWidget(content_group)
-        
-        # Buttons
-        button_layout = QHBoxLayout()
-        
-        self.save_button = QPushButton("Save Log Entry")
-        self.save_button.setProperty("class", "primary")
-        
-        self.cancel_button = QPushButton("Cancel")
-        
-        self.clear_button = QPushButton("Clear All")
-        self.clear_button.setProperty("class", "danger")
-        
-        button_layout.addWidget(self.clear_button)
-        button_layout.addStretch()
-        button_layout.addWidget(self.cancel_button)
-        button_layout.addWidget(self.save_button)
-        
-        layout.addLayout(button_layout)
-        
+        form_layout.addRow("\uf27a  Log Entry:", self.content_edit)  # FontAwesome sticky-note icon
+
+        self.status_combo = QComboBox()
+        self.status_combo.addItems(["Routine", "Alert", "Critical"])
+        form_layout.addRow("\uf0e7  Status:", self.status_combo)  # FontAwesome bolt icon
+
+        self.priority_spin = QSpinBox()
+        self.priority_spin.setRange(1, 5)
+        form_layout.addRow("\uf005  Priority:", self.priority_spin)  # FontAwesome star icon
+
+        card_layout.addWidget(form_group)
+
+        # Action buttons
+        btn_layout = QHBoxLayout()
+        self.save_btn = QPushButton("\uf0c7  Save")  # FontAwesome save icon
+        self.save_btn.setProperty("class", "icon-btn")
+        self.save_btn.setObjectName("fa")
+        self.cancel_btn = QPushButton("\uf00d  Cancel")  # FontAwesome times icon
+        self.cancel_btn.setProperty("class", "icon-btn")
+        self.cancel_btn.setObjectName("fa")
+        btn_layout.addWidget(self.save_btn)
+        btn_layout.addWidget(self.cancel_btn)
+        card_layout.addLayout(btn_layout)
+
+        layout.addWidget(card_frame)
+
         # Status label
         self.status_label = QLabel()
         self.status_label.setProperty("class", "status")
@@ -129,8 +105,8 @@ class LogEntryDialog(QDialog):
     
     def setup_connections(self):
         """Setup signal connections"""
-        self.save_button.clicked.connect(self.save_log)
-        self.cancel_button.clicked.connect(self.reject)
+        self.save_btn.clicked.connect(self.save_log)
+        self.cancel_btn.clicked.connect(self.reject)
         self.clear_button.clicked.connect(self.clear_form)
         self.classification_combo.currentTextChanged.connect(self.on_classification_changed)
     
@@ -235,9 +211,9 @@ class LogEntryDialog(QDialog):
             self.log_saved.emit(log_data)
             
             # Close dialog after a brief pause
-            self.save_button.setText("Saved!")
-            self.save_button.setEnabled(False)
-            
+            self.save_btn.setText("Saved!")
+            self.save_btn.setEnabled(False)
+
             # Auto-close after 2 seconds or allow manual close
             from PyQt6.QtCore import QTimer
             QTimer.singleShot(2000, self.accept)

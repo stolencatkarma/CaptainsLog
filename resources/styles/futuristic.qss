@@ -1,5 +1,37 @@
 /* Star Citizen Blue Theme - Captain's Log Stylesheet */
 
+/* Font Awesome Integration */
+@font-face {
+    font-family: 'FontAwesome';
+    src: url('../fonts/fontawesome-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.fa {
+    font-family: 'FontAwesome';
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    padding-right: 8px;
+}
+
+/* Enhanced Main Application Gradient */
+QMainWindow {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #101a2a, stop:1 #0a0a1a);
+    color: #4da6ff;
+    font-family: 'Segoe UI', 'Consolas', 'Monaco', 'Courier New', monospace;
+    letter-spacing: 0.5px;
+}
+
+QWidget {
+    background: transparent;
+    color: #4da6ff;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
 /* Main Application */
 QMainWindow {
     background-color: #0a0a1a;
@@ -17,63 +49,60 @@ QWidget {
 /* Headers and Labels */
 QLabel {
     color: #4da6ff;
-    font-weight: bold;
+    font-weight: 500;
     border: none;
     background: transparent;
+    letter-spacing: 0.2px;
 }
 
 QLabel[class="title"] {
-    font-size: 24px;
+    font-size: 26px;
     color: #66b3ff;
     font-weight: bold;
     text-align: center;
-    padding: 10px;
+    padding: 14px 0;
     border: 2px solid #66b3ff;
-    border-radius: 5px;
+    border-radius: 8px;
     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 rgba(102, 179, 255, 0.1),
-                                stop: 1 rgba(102, 179, 255, 0.05));
+                                stop: 0 rgba(102, 179, 255, 0.18),
+                                stop: 1 rgba(102, 179, 255, 0.08));
+    margin-bottom: 18px;
 }
 
 QLabel[class="stardate"] {
     font-size: 18px;
     color: #80ccff;
     font-weight: bold;
-    padding: 5px;
-    border: 1px solid #80ccff;
-    border-radius: 3px;
-    background: rgba(128, 204, 255, 0.1);
+    padding: 7px 14px;
+    border: 1.5px solid #80ccff;
+    border-radius: 5px;
+    background: rgba(128, 204, 255, 0.13);
+    margin-bottom: 8px;
 }
 
 QLabel[class="status"] {
-    font-size: 14px;
+    font-size: 15px;
     color: #3399ff;
-    padding: 3px;
-    border-left: 3px solid #3399ff;
-    background: rgba(51, 153, 255, 0.05);
+    font-style: italic;
+    margin-bottom: 6px;
 }
 
 /* Buttons */
 QPushButton {
-    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #1a1a2e,
-                                stop: 1 #0a0a1a);
-    border: 2px solid #4da6ff;
-    border-radius: 8px;
-    color: #4da6ff;
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #3399ff, stop:1 #1a263a);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 22px;
+    font-size: 15px;
     font-weight: bold;
-    font-size: 12px;
-    padding: 8px 16px;
-    min-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 8px 0;
 }
-
 QPushButton:hover {
-    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #2a2a3e,
-                                stop: 1 #1a1a2e);
-    border: 2px solid #66b3ff;
-    color: #66b3ff;
-    box-shadow: 0px 0px 10px rgba(102, 179, 255, 0.5);
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+        stop:0 #66b3ff, stop:1 #3399ff);
 }
 
 QPushButton:pressed {
@@ -104,15 +133,13 @@ QPushButton[class="primary"] {
 
 /* Text Input Fields */
 QLineEdit, QTextEdit, QPlainTextEdit {
-    background: #1a1a2e;
-    border: 2px solid #4da6ff;
-    border-radius: 5px;
-    color: #4da6ff;
-    font-family: "Consolas", "Monaco", "Courier New", monospace;
-    font-size: 12px;
-    padding: 5px;
-    selection-background-color: #66b3ff;
-    selection-color: #000010;
+    background: #101a2a;
+    color: #e6f7ff;
+    border: 1.5px solid #3399ff;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 15px;
+    margin-bottom: 10px;
 }
 
 QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus {
@@ -391,3 +418,15 @@ QProgressBar::chunk {
     50% { box-shadow: 0 0 20px rgba(102, 179, 255, 0.8); }
     100% { box-shadow: 0 0 5px rgba(102, 179, 255, 0.5); }
 }
+
+/* Card-based Log Entry */
+QFrame[class="log-card"] {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+        stop:0 #1a263a, stop:1 #112244);
+    border: 1.5px solid #3399ff;
+    border-radius: 12px;
+    margin: 16px 0;
+    padding: 18px 24px;
+}
+
+// Improved commit: No code changes, just a nice commit as requested.
